@@ -1,0 +1,20 @@
+{
+  "name": "unnati",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get your application up and running.",
+  "main": "server.js",
+  "dependencies": {
+    "app-root-path": "^2.2.1",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nodemailer": "^6.3.0",
+    "swagger-ui-express": "^4.0.7",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "scripts": {},
+  "author": "Rakesh",
+  "license": "ISC"
+}

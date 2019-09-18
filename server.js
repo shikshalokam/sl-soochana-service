@@ -42,10 +42,12 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
   
 
 
-app.use('/notify/api/v1/',authenticate,emailNotifier);
+app.use('/soochana/api/v1/',emailNotifier);
 
 var httpServer = http.createServer( app);
 httpServer.listen(port, function () {
     console.log('Server started on port  ', port)
 });
+
+
 

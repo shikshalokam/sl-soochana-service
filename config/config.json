@@ -5,6 +5,7 @@
         "smtp_host":"smtp://smtp-relay.gmail.com",
         "smtp_port":587,
         "from_email_id":"soochana@shikshalokam.org"
-    }
+    },
+    "token":"token@733"
     
 }

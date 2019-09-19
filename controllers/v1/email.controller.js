@@ -3,15 +3,15 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var path = require('path');
 
-var reportServ = require('../../services/email.service');
+var emailServ = require('../../services/email.service');
 
 
-router.get('/reportsList', reportList);
+router.post('/emailService/sendEmail', sendEmail);
 
 module.exports = router;
-function reportList(req, res) {
+function sendEmail(req, res) {
           try{
-            reportServ.getReports(req, res)
+            emailServ.sendEmail(req, res)
             .then(function (result) {
               res.send(result);
             }).catch(e => console.log("e",e));

@@ -10,30 +10,59 @@
 var config = require('../config/config.json');
 var winston = require('../config/winston');
 
+'use strict';
+const nodemailer = require('nodemailer');
 
-/**
- * Loading external libraries used
- */
-var request = require('request');
 
 var _this = this;
 var api = {};
-api.getReports = getReports;
+api.sendEmail = sendEmail;
 module.exports = api;
 
 /**
  * 
- * @param {*} getReports api is used to get the reports of all scholl names with observation names 
+ * @param {*} sendEmail api is used send the email
  */
-async function getReports(req) {
+async function sendEmail(req) {
     return new Promise(async (resolve, reject) => {
         try {
-                    return resolve({
-                        status: "success",
-                        message: "successfully got obseration By entity",
-                        data: responseObj
-                       
-                    })
+
+            let testAccount = await nodemailer.createTestAccount();
+            let transporter = nodemailer.createTransport({
+                host: config.email_config.smtp_host,
+                port: config.email_config.smtp_port,
+                secure: false, // true for 465, false for other ports
+            });
+
+            req.body.emails.forEach(function (ele) {
+                // send mail with defined transport object
+                let info = transporter.sendMail({
+                    from: '<'+ config.email_config.from_email_id+'>', // sender address
+                    to: ele, // list of receivers
+                    subject: req.body.subject, // Subject line
+                    text: req.body.message // plain text body
+                    // html: '<b>Hello world?</b>' // html body
+                });
+
+                winston.log(info);
+
+            });
+
+
+
+            // console.log('Message sent: %s', info.messageId);
+            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+            // Preview only available when sending through an Ethereal account
+            // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+
+
+            // main().catch(console.error);
+            return resolve({
+                status: "success",
+                message: "successfully mail sent",
+            })
         } catch (error) {
             return reject({
                 status: "failed",

@@ -19,6 +19,14 @@ var port                    = config.PORT;
 var app                     = express();
 var morgan                  = require('morgan');
 var winston                 = require('./config/winston');
+// var mongoose                = require('mongoose');
+
+
+// mongoose.connect(config.DB_URL, { useNewUrlParser: true });
+// mongoose.set('useNewUrlParser', true);
+// mongoose.set('useFindAndModify', false);
+// mongoose.set('useCreateIndex', true);
+// mongoose.set( 'useUnifiedTopology', true);
 
 app.use(bodyParser.json({ limit: "20mb" }));
 app.use(bodyParser.urlencoded({ limit: "20mb", extended: true, parameterLimit: 20000 }));
@@ -48,6 +56,7 @@ var httpServer = http.createServer( app);
 httpServer.listen(port, function () {
     console.log('Server started on port  ', port)
 });
+
 
 
 
